@@ -1,0 +1,686 @@
+---
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<title>LyeDev</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@300&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+		<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+		<style>
+			html.lenis, html.lenis body {
+				height: auto;
+			}
+			.lenis.lenis-smooth {
+				scroll-behavior: auto;
+			}
+			.lenis.lenis-smooth [data-lenis-prevent] {
+				overscroll-behavior: contain;
+			}
+			.lenis.lenis-stopped {
+				overflow: hidden;
+			}
+			.lenis.lenis-scrolling iframe {
+				pointer-events: none;
+			}
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			html {
+				overflow-y: scroll;
+				scrollbar-width: none;
+			}
+			html::-webkit-scrollbar {
+				display: none;
+			}
+			body {
+				font-family: 'League Spartan', sans-serif;
+				background: #fafaf8;
+			}
+			.page {
+				height: 100vh;
+				scroll-snap-align: start;
+				position: relative;
+				overflow: hidden;
+			}
+			#page1 {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				background: linear-gradient(180deg, #fafaf8 0%, #eae8e4 100%);
+				padding-bottom: 120px;
+			}
+			.hero {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				position: relative;
+				z-index: 2;
+			}
+			#brand-text {
+				user-select: none;
+				font-weight: 300;
+				font-size: 96px;
+				z-index: 20;
+				text-align: center;
+				letter-spacing: 4px;
+			}
+			@keyframes letterReveal {
+				0% { opacity: 0; transform: translateY(20px) scale(0.8); }
+				100% { opacity: 1; transform: translateY(0) scale(1); }
+			}
+			.accent-line {
+				width: 0;
+				height: 1px;
+				background: linear-gradient(90deg, transparent, #444, transparent);
+				margin: -8px auto 10px;
+				animation: drawLine 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
+			}
+			@keyframes drawLine {
+				to { width: 250px; }
+			}
+			.tagline {
+				font-family: 'League Spartan', sans-serif;
+				font-size: 14px;
+				font-weight: 500;
+				letter-spacing: 4px;
+				text-transform: uppercase;
+				color: #777;
+				margin-top: 0px;
+				opacity: 0;
+				animation: fadeUp 0.8s ease 1s forwards;
+				user-select: none;
+				-webkit-user-select: none;
+			}
+			@keyframes fadeUp {
+				0% { opacity: 0; transform: translateY(10px); }
+				100% { opacity: 1; transform: translateY(0); }
+			}
+			.vignette {
+				position: absolute;
+				inset: 0;
+				pointer-events: none;
+				z-index: 15;
+				background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.12) 100%);
+			}
+			.wave-container {
+				position: absolute;
+				bottom: -20px;
+				left: 0;
+				right: 0;
+				height: 200px;
+				z-index: 0;
+				pointer-events: none;
+			}
+			.wave {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 100'%3E%3Cpath fill='%23444' d='M0 50 Q 200 0 400 50 T 800 50 L 800 100 L 0 100 Z' /%3E%3C/svg%3E") repeat-x;
+				background-position: bottom;
+				will-change: background-position, transform;
+			}
+			@keyframes wave-anim-main {
+				from { background-position-x: 0; }
+				to   { background-position-x: -1000px; }
+			}
+			@keyframes wave-anim-sub1 {
+				from { background-position-x: 0; }
+				to   { background-position-x: -700px; }
+			}
+			@keyframes wave-anim-sub2 {
+				from { background-position-x: 0; }
+				to   { background-position-x: -400px; }
+			}
+			.wave.main {
+				height: 180px;
+				background-size: 1000px 100%;
+				opacity: 0.25;
+				animation: wave-anim-main 12s infinite linear;
+				z-index: 1;
+			}
+			.wave.sub1 {
+				height: 130px;
+				background-size: 700px 100%;
+				opacity: 0.5;
+				animation: wave-anim-sub1 8s infinite linear reverse;
+				z-index: 2;
+			}
+			.wave.sub2 {
+				height: 90px;
+				background-size: 400px 100%;
+				opacity: 0.65;
+				animation: wave-anim-sub2 5s infinite linear;
+				z-index: 3;
+			}
+			/* Page 2 */
+			#page2 {
+				background: #0a0a0a;
+				display: flex;
+				justify-content: center;
+				align-items: flex-start;
+				padding-top: 0;
+			}
+			#constellation {
+				position: absolute;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+				pointer-events: none;
+				opacity: 0.5;
+			}
+			.about-content {
+				width: 100%;
+				max-width: 100%;
+				padding: 32px 24px;
+				text-align: left;
+				opacity: 0;
+				transform: translateY(40px);
+				transition: opacity 0.8s ease, transform 0.8s ease;
+				user-select: none;
+				-webkit-user-select: none;
+			}
+			.about-content.visible {
+				opacity: 1;
+				transform: translateY(0);
+			}
+			.about-content h2 {
+				font-family: 'Bitcount Single', cursive;
+				font-weight: 300;
+				margin-bottom: 16px;
+				color: #fff;
+				letter-spacing: 1px;
+				text-align: left;
+				line-height: 0.85;
+			}
+			.about-content h2 .hi {
+				font-size: 20px;
+				color: #999;
+				display: block;
+				margin-bottom: -14px;
+			}
+			.about-content h2 .name {
+				font-size: 48px;
+				line-height: 0.85;
+				background: linear-gradient(90deg, #4d4d4d, #d8d8d8, #fff, #d8d8d8, #4d4d4d);
+				background-size: 200% 100%;
+				-webkit-background-clip: text;
+				background-clip: text;
+				-webkit-text-fill-color: transparent;
+				animation: shimmer 4s ease-in-out infinite;
+			}
+			.about-content h2 .name + .name {
+				margin-top: 14px;
+			}
+			@keyframes shimmer {
+				0% { background-position: 100% 0; }
+				50% { background-position: 0% 0; }
+				100% { background-position: 100% 0; }
+			}
+			.about-content h2 .subtitle {
+				font-size: 20px;
+				color: #999;
+				margin-top: 2.5px;
+			}
+			.about-content p {
+				font-family: 'League Spartan', sans-serif;
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 1.7;
+				color: #888;
+				text-align: left;
+			}
+			.about-content p + p {
+				margin-top: 8px;
+			}
+			.accent-line-dark {
+				width: 0;
+				height: 1px;
+				background: linear-gradient(90deg, #666, #333);
+				margin: 10px 0 10px;
+				transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+			}
+			.about-content.visible .accent-line-dark {
+				width: 120px;
+			}
+			.section-label {
+				font-size: 10px;
+				letter-spacing: 3px;
+				text-transform: uppercase;
+				color: #444;
+				margin-bottom: 4px;
+				text-align: left;
+			}
+			.marquee-wrapper {
+				width: 100%;
+				overflow: hidden;
+				margin-bottom: 12px;
+			}
+			.marquee-row {
+				display: flex;
+				gap: 24px;
+				width: max-content;
+				animation: marquee-scroll 25s linear infinite;
+				padding: 4px 0;
+			}
+			.marquee-row.reverse {
+				animation-direction: reverse;
+			}
+			.marquee-row span {
+				font-size: 13px;
+				letter-spacing: 1px;
+				color: #666;
+				white-space: nowrap;
+				transition: color 0.3s ease;
+			}
+			.marquee-row span.font-inter {
+				font-family: 'Inter', sans-serif;
+				font-weight: 500;
+			}
+			.marquee-row span.font-space {
+				font-family: 'Space Grotesk', sans-serif;
+				font-weight: 500;
+			}
+			.marquee-row span.font-mono {
+				font-family: 'JetBrains Mono', monospace;
+				font-weight: 400;
+			}
+			.marquee-row span:hover {
+				color: #fff;
+			}
+			@keyframes marquee-scroll {
+				0% { transform: translateX(0); }
+				100% { transform: translateX(-50%); }
+			}
+			.marquee-wrapper:hover .marquee-row {
+				animation-play-state: paused;
+			}
+			.cta-row {
+				display: flex;
+				gap: 12px;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+			.scroll-hint {
+				display: none;
+			}
+			.cta-btn {
+				font-family: 'League Spartan', sans-serif;
+				font-size: 11px;
+				font-weight: 500;
+				letter-spacing: 1.5px;
+				text-transform: uppercase;
+				text-decoration: none;
+				box-sizing: border-box;
+				height: 34px;
+				padding: 8px 16px;
+				border-radius: 4px;
+				transition: all 0.3s ease;
+				cursor: pointer;
+				line-height: 1;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				white-space: nowrap;
+			}
+			.cta-btn.primary {
+				background: #fff;
+				color: #0a0a0a;
+				border: 1px solid #fff;
+				gap: 8px;
+			}
+			.cta-btn.icon-only {
+				width: 34px;
+				padding: 0;
+				gap: 0;
+			}
+			.cta-btn.icon-only svg {
+				width: 14px;
+				height: 14px;
+				display: block;
+				fill: none;
+				stroke: currentColor;
+				stroke-width: 2;
+				transition: fill 0.2s ease, transform 0.2s ease;
+			}
+			.cta-btn.icon-only.active {
+				background: #fff;
+				color: #0a0a0a;
+				border-color: #fff;
+			}
+			.cta-btn.icon-only.active svg {
+				fill: currentColor;
+				stroke: currentColor;
+				transform: scale(1.04);
+			}
+			.cta-btn.primary:hover {
+				background: #0a0a0a;
+				border-color: #fff;
+				color: #fff;
+			}
+			.cta-btn.secondary {
+				background: transparent;
+				color: #ccc;
+				border: 1px solid #555;
+				gap: 8px;
+			}
+			.cta-btn.secondary:hover {
+				border-color: #aaa;
+				color: #fff;
+			}
+			.dropdown-wrap {
+				position: relative;
+			}
+			.dropdown-btn {
+				gap: 6px;
+			}
+			.dropdown-btn.spam-click {
+				transform: scale(0.98);
+			}
+			.dropdown-arrow {
+				transition: transform 0.3s ease;
+			}
+			.dropdown-wrap.open .dropdown-arrow {
+				transform: rotate(-90deg);
+			}
+			.dropdown-menu {
+				position: absolute;
+				top: calc(100% + 6px);
+				left: 0;
+				width: fit-content;
+				min-width: 0;
+				background: #111;
+				border: 1px solid #333;
+				border-radius: 6px;
+				opacity: 0;
+				visibility: hidden;
+				transform: translateY(-8px);
+				transition: all 0.25s ease;
+				z-index: 100;
+				overflow: hidden;
+			}
+			.dropdown-wrap.open .dropdown-menu {
+				opacity: 1;
+				visibility: visible;
+				transform: translateY(0);
+			}
+			.dropdown-item {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				padding: 10px 10px 10px 12px;
+				font-family: 'League Spartan', sans-serif;
+				font-size: 11px;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				text-decoration: none;
+				color: #999;
+				transition: all 0.2s ease;
+				opacity: 0;
+				transform: translateX(-10px);
+			}
+			.dropdown-wrap.open .dropdown-item {
+				opacity: 1;
+				transform: translateX(0);
+			}
+			.dropdown-wrap.open .dropdown-item:nth-child(1) { transition-delay: 0.05s; }
+			.dropdown-wrap.open .dropdown-item:nth-child(2) { transition-delay: 0.1s; }
+			.dropdown-wrap.open .dropdown-item:nth-child(3) { transition-delay: 0.15s; }
+			.dropdown-item:hover {
+				background: #1a1a1a;
+				color: #fff;
+			}
+			@media (min-width: 768px) {
+				.about-content {
+					max-width: 600px;
+					padding: 40px;
+				}
+				.about-content h2 .hi {
+					font-size: 20px;
+				}
+				.about-content h2 .name {
+					font-size: 56px;
+				}
+				.about-content h2 .subtitle {
+					font-size: 22px;
+				}
+				.about-content p {
+					font-size: 16px;
+					text-align: center;
+				}
+				.accent-line-dark {
+					margin: 24px auto 32px;
+				}
+				.about-content.visible .accent-line-dark {
+					width: 200px;
+				}
+				.section-label {
+					text-align: center;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Page 1 -->
+		<div class="page" id="page1">
+			<div class="hero">
+				<h1 id="brand-text" style="font-family: 'Bitcount Single', cursive; font-weight: 300; font-size: 96px;">
+					<span style="opacity:0;animation:letterReveal 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.1s forwards">L</span><span style="opacity:0;animation:letterReveal 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.2s forwards">y</span><span style="opacity:0;animation:letterReveal 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.3s forwards">e</span><span style="opacity:0;animation:letterReveal 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.4s forwards">D</span><span style="opacity:0;animation:letterReveal 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.5s forwards">e</span><span style="opacity:0;animation:letterReveal 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.6s forwards">v</span>
+				</h1>
+				<div class="accent-line"></div>
+				<p class="tagline">Python Developer · JavaScript Learner</p>
+			</div>
+			<div class="wave-container">
+				<div class="wave main"></div>
+				<div class="wave sub1"></div>
+				<div class="wave sub2"></div>
+			</div>
+			<div class="vignette"></div>
+		</div>
+
+		<!-- Page 2 -->
+		<div class="page" id="page2">
+			<canvas id="constellation"></canvas>
+			<div class="about-content" id="about-content">
+				<h2>
+					<span class="hi">Hey there</span><br>
+					<span class="name">I'm LyeDev</span><br>
+					<span class="name">aka DClyde</span><br>
+					<span class="subtitle">Self-Taught Programmer</span>
+				</h2>
+				<p>As a self-taught Python developer currently learning JavaScript, I built this profile to showcase my work and share what I enjoy, and I'm always open to feedback, code reviews, or learning from anyone.</p>
+
+				<div class="accent-line-dark"></div>
+
+				<p class="section-label">Tech Stack</p>
+				<div class="marquee-wrapper">
+					<div class="marquee-row">
+						<span class="font-inter">Python</span><span class="font-inter">JavaScript</span><span class="font-inter">TypeScript</span><span class="font-inter">Kotlin</span><span class="font-inter">Lua</span><span class="font-inter">HTML</span><span class="font-inter">CSS</span><span class="font-space">Tailwind</span><span class="font-inter">React</span><span class="font-inter">React Native</span><span class="font-inter">Flutter</span><span class="font-space">Astro</span><span class="font-space">Vite + React</span><span class="font-inter">Supabase</span>
+						<span class="font-inter">Python</span><span class="font-inter">JavaScript</span><span class="font-inter">TypeScript</span><span class="font-inter">Kotlin</span><span class="font-inter">Lua</span><span class="font-inter">HTML</span><span class="font-inter">CSS</span><span class="font-space">Tailwind</span><span class="font-inter">React</span><span class="font-inter">React Native</span><span class="font-inter">Flutter</span><span class="font-space">Astro</span><span class="font-space">Vite + React</span><span class="font-inter">Supabase</span>
+					</div>
+					<div class="marquee-row reverse">
+						<span class="font-mono">VS Code</span><span class="font-mono">OpenCode</span><span class="font-mono">Claude Code</span><span class="font-mono">Codex</span><span class="font-mono">Antigravity IDE</span><span class="font-inter">GitHub</span><span class="font-space">Vercel</span><span class="font-inter">Netlify</span><span class="font-inter">Render</span><span class="font-inter">Windows</span><span class="font-inter">Linux</span>
+						<span class="font-mono">VS Code</span><span class="font-mono">OpenCode</span><span class="font-mono">Claude Code</span><span class="font-mono">Codex</span><span class="font-mono">Antigravity IDE</span><span class="font-inter">GitHub</span><span class="font-space">Vercel</span><span class="font-inter">Netlify</span><span class="font-inter">Render</span><span class="font-inter">Windows</span><span class="font-inter">Linux</span>
+					</div>
+				</div>
+
+				<div class="cta-row">
+					<a href="mailto:lyedev@zohomail.com" class="cta-btn secondary">Let's Connect <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+					<a href="https://github.com/LyeDevGit" target="_blank" class="cta-btn primary">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+					GitHub
+				</a>
+					<div class="dropdown-wrap" id="hire-dropdown">
+						<button type="button" class="cta-btn secondary dropdown-btn" id="hire-btn">Hire Me <svg class="dropdown-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+						<div class="dropdown-menu">
+							<a href="#" class="dropdown-item" download>
+								<i class="fi fi-rr-file-download"></i>
+								Resume
+							</a>
+							<a href="#" class="dropdown-item" download>
+								<i class="fi fi-rr-file-download"></i>
+								Detailed CV
+							</a>
+							<a href="#" class="dropdown-item" target="_blank">
+								<i class="fi fi-rr-link"></i>
+								Freelancing
+							</a>
+						</div>
+					</div>
+					<button type="button" class="cta-btn primary icon-only" id="star-btn" aria-label="Star">
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+						</svg>
+					</button>
+				</div>
+			</div>
+			<div class="scroll-hint">
+				<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+				<span>Scroll up</span>
+			</div>
+		</div>
+
+		<script>
+			const lenis = new Lenis({
+				duration: 1.2,
+				easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+				orientation: 'vertical',
+				gestureOrientation: 'vertical',
+				smoothWheel: true,
+			});
+
+			let isSnapping = false;
+			let snapTimeout = null;
+
+			lenis.on('scroll', ({ scroll }) => {
+				if (isSnapping) return;
+
+				const vh = window.innerHeight;
+				const currentPage = Math.round(scroll / vh);
+				const target = currentPage * vh;
+				const dist = Math.abs(scroll - target);
+
+				if (dist > 2) {
+					clearTimeout(snapTimeout);
+					snapTimeout = setTimeout(() => {
+						isSnapping = true;
+						lenis.scrollTo(target, { duration: 0.6, easing: (t) => 1 - Math.pow(1 - t, 4) });
+						setTimeout(() => { isSnapping = false; }, 700);
+					}, 80);
+				}
+			});
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						document.getElementById('about-content').classList.add('visible');
+					}
+				});
+			}, { threshold: 0.5 });
+			observer.observe(document.getElementById('page2'));
+
+			function raf(time) {
+				lenis.raf(time);
+				requestAnimationFrame(raf);
+			}
+			requestAnimationFrame(raf);
+
+			const hireBtn = document.getElementById('hire-btn');
+			const hireDropdown = document.getElementById('hire-dropdown');
+			hireBtn.addEventListener('click', (e) => {
+				e.preventDefault();
+				e.stopPropagation();
+				hireBtn.classList.remove('spam-click');
+				void hireBtn.offsetWidth;
+				hireBtn.classList.add('spam-click');
+				hireDropdown.classList.toggle('open');
+			});
+			hireBtn.addEventListener('transitionend', () => {
+				hireBtn.classList.remove('spam-click');
+			});
+			document.addEventListener('click', () => {
+				hireDropdown.classList.remove('open');
+			});
+
+			const starBtn = document.getElementById('star-btn');
+			const starIcon = starBtn.querySelector('svg');
+			starBtn.addEventListener('click', () => {
+				starBtn.classList.toggle('active');
+				starIcon.classList.toggle('filled');
+			});
+
+			const canvas = document.getElementById('constellation');
+			const ctx = canvas.getContext('2d');
+			let dots = [];
+			const DOT_COUNT = 50;
+			const CONNECT_DIST = 150;
+			const DOT_SPEED = 0.15;
+
+			function resizeCanvas() {
+				canvas.width = canvas.offsetWidth;
+				canvas.height = canvas.offsetHeight;
+			}
+			resizeCanvas();
+			window.addEventListener('resize', resizeCanvas);
+
+			function initDots() {
+				dots = [];
+				for (let i = 0; i < DOT_COUNT; i++) {
+					dots.push({
+						x: Math.random() * canvas.width,
+						y: Math.random() * canvas.height,
+						vx: (Math.random() - 0.5) * DOT_SPEED,
+						vy: (Math.random() - 0.5) * DOT_SPEED,
+						r: Math.random() * 1.5 + 0.5,
+					});
+				}
+			}
+			initDots();
+
+			function drawConstellation() {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				for (let i = 0; i < dots.length; i++) {
+					const a = dots[i];
+					a.x += a.vx;
+					a.y += a.vy;
+					if (a.x < 0 || a.x > canvas.width) a.vx *= -1;
+					if (a.y < 0 || a.y > canvas.height) a.vy *= -1;
+
+					ctx.beginPath();
+					ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+					ctx.fillStyle = '#444';
+					ctx.fill();
+
+					for (let j = i + 1; j < dots.length; j++) {
+						const b = dots[j];
+						const dx = a.x - b.x;
+						const dy = a.y - b.y;
+						const dist = Math.sqrt(dx * dx + dy * dy);
+						if (dist < CONNECT_DIST) {
+							ctx.beginPath();
+							ctx.moveTo(a.x, a.y);
+							ctx.lineTo(b.x, b.y);
+							ctx.strokeStyle = `rgba(68, 68, 68, ${1 - dist / CONNECT_DIST})`;
+							ctx.lineWidth = 0.5;
+							ctx.stroke();
+						}
+					}
+				}
+				requestAnimationFrame(drawConstellation);
+			}
+			drawConstellation();
+		</script>
+	</body>
+</html>
