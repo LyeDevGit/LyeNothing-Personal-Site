@@ -14,6 +14,8 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@300&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+		<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css">
+		<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css">
 		<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 		<style>
 			html.lenis, html.lenis body {
@@ -70,8 +72,9 @@
 			}
 			#brand-text {
 				user-select: none;
+				font-family: 'Bitcount Single', cursive;
 				font-weight: 300;
-				font-size: 96px;
+				font-size: clamp(48px, 15vw, 96px);
 				z-index: 20;
 				text-align: center;
 				letter-spacing: 4px;
@@ -181,13 +184,23 @@
 				pointer-events: none;
 				opacity: 0.5;
 			}
+			.page2-qr {
+				position: absolute;
+				right: 6px;
+				top: 1px;
+				width: clamp(170px, 16vw, 182px);
+				height: auto;
+				pointer-events: none;
+				user-select: none;
+			}
 			.about-content {
+				position: relative;
 				width: 100%;
 				max-width: 100%;
-				padding: 32px 24px;
+				padding: 24px 24px 32px;
 				text-align: left;
 				opacity: 0;
-				transform: translateY(40px);
+				transform: translateY(34px);
 				transition: opacity 0.8s ease, transform 0.8s ease;
 				user-select: none;
 				-webkit-user-select: none;
@@ -199,7 +212,7 @@
 			.about-content h2 {
 				font-family: 'Bitcount Single', cursive;
 				font-weight: 300;
-				margin-bottom: 16px;
+				margin-bottom: 6px;
 				color: #fff;
 				letter-spacing: 1px;
 				text-align: left;
@@ -232,7 +245,7 @@
 			.about-content h2 .subtitle {
 				font-size: 20px;
 				color: #999;
-				margin-top: 2.5px;
+				margin-top: 0px;
 			}
 			.about-content p {
 				font-family: 'League Spartan', sans-serif;
@@ -241,6 +254,7 @@
 				line-height: 1.7;
 				color: #888;
 				text-align: left;
+				margin-top: -2px;
 			}
 			.about-content p + p {
 				margin-top: 8px;
@@ -249,10 +263,22 @@
 				width: 0;
 				height: 1px;
 				background: linear-gradient(90deg, #666, #333);
-				margin: 10px 0 10px;
+				margin: 9.5px 0 10px;
 				transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 			}
 			.about-content.visible .accent-line-dark {
+				width: 120px;
+			}
+			.fp-divider {
+				height: 1px;
+				background: linear-gradient(90deg, #666, #333);
+				margin: 16px 0 12.5px;
+				width: 120px;
+			}
+			.kb-divider {
+				height: 1px;
+				background: linear-gradient(90deg, #666, #333);
+				margin: 20px 0 12.5px; /* Adjust spacing specifically for keyboard here */
 				width: 120px;
 			}
 			.section-label {
@@ -355,6 +381,12 @@
 				stroke-width: 2;
 				transition: fill 0.2s ease, transform 0.2s ease;
 			}
+			.cta-btn.icon-only i {
+				font-size: 14px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
 			.cta-btn.icon-only.active {
 				background: #fff;
 				color: #0a0a0a;
@@ -442,13 +474,371 @@
 				background: #1a1a1a;
 				color: #fff;
 			}
-			@media (min-width: 768px) {
+			.featured-project-container {
+				margin-top: 10px;
+				width: 100%;
+				opacity: 0;
+				transform: translateY(20px);
+				transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+			}
+			.about-content.visible .featured-project-container {
+				opacity: 1;
+				transform: translateY(0);
+			}
+			.fp-scale-wrapper {
+				transform-origin: left top;
+				transition: transform 0.3s ease;
+			}
+			.featured-project-card {
+				display: flex;
+				flex-direction: column;
+				background: rgba(255, 255, 255, 0.03);
+				border: 1px solid rgba(255, 255, 255, 0.08);
+				border-radius: 12px;
+				overflow: hidden;
+				text-decoration: none;
+				transition: all 0.3s ease;
+				backdrop-filter: blur(10px);
+				-webkit-backdrop-filter: blur(10px);
+				margin-top: 7.5px;
+			}
+			.featured-project-card:hover {
+				background: rgba(255, 255, 255, 0.06);
+				border-color: rgba(255, 255, 255, 0.15);
+				transform: translateY(-4px);
+				box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+			}
+			.fp-image-wrap {
+				width: 100%;
+				height: 160px;
+				overflow: hidden;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+				flex-shrink: 0;
+			}
+			.fp-image-wrap img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center top;
+				transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+			}
+			.featured-project-card:hover .fp-image-wrap img {
+				transform: scale(1.06);
+			}
+			.fp-content {
+				padding: 14px 16px 16px;
+			}
+			.fp-content h3 {
+				font-family: 'Space Grotesk', sans-serif;
+				font-size: 15px;
+				font-weight: 600;
+				color: #fff;
+				margin-bottom: 4px;
+			}
+			.about-content .fp-content p {
+				font-family: 'League Spartan', sans-serif;
+				font-size: 12px;
+				color: #888;
+				margin-top: 0;
+				margin-bottom: 10px;
+				line-height: 1.4;
+				display: -webkit-box;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+			}
+			.fp-tech {
+				display: flex;
+				gap: 6px;
+				flex-wrap: wrap;
+				margin-bottom: 12px;
+			}
+			.fp-tech span {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 9px;
+				color: #666;
+				background: rgba(255,255,255,0.04);
+				border: 1px solid rgba(255,255,255,0.06);
+				padding: 3px 7px;
+				border-radius: 3px;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+			}
+			.fp-actions {
+				display: flex;
+				gap: 8px;
+				flex-wrap: wrap;
+			}
+			.fp-action-btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 5px;
+				height: 28px;
+				padding: 0 12px;
+				border-radius: 4px;
+				font-family: 'League Spartan', sans-serif;
+				font-size: 11px;
+				font-weight: 500;
+				letter-spacing: 0.5px;
+				line-height: 1;
+				text-decoration: none;
+				transition: all 0.2s ease;
+				box-sizing: border-box;
+			}
+			.fp-action-btn.primary {
+				background: #fff;
+				color: #0a0a0a;
+				border: 1px solid transparent;
+			}
+			.fp-action-btn.primary:hover {
+				background: #e0e0e0;
+			}
+			.fp-action-btn.secondary {
+				background: transparent;
+				color: #aaa;
+				border: 1px solid #333;
+			}
+			.fp-action-btn.secondary:hover {
+				color: #fff;
+				border-color: #666;
+			}
+
+			.keyboard-section {
+				width: 100%;
+				margin-top: 8px;
+				opacity: 0;
+				transform: translateY(20px);
+				transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
+			}
+			.about-content.visible .keyboard-section {
+				opacity: 1;
+				transform: translateY(0);
+			}
+			.keyboard {
+				width: 100%;
+				margin-top: 12px;
+				aspect-ratio: 34 / 11;
+				background-color: #020202;
+				background-image: radial-gradient(100% 150% ellipse at top center, #1c1c1c 0%, #020202 100%);
+				border-bottom: 0.2cqi solid #020202;
+				border-radius: 0.5cqi;
+				container-name: keyboard;
+				container-type: size;
+				padding: 0.5cqi 0.5cqi 1.25cqi;
+			}
+			@container keyboard (min-width: 0px) {
+				.board {
+					aspect-ratio: 34 / 11;
+					box-shadow: inset 0 0 2cqi #020202;
+					border-radius: 0.5cqi;
+					display: flex;
+					flex-direction: column;
+					overflow: hidden;
+					padding: 0.25cqi;
+					row-gap: 0.33cqi;
+				}
+				.keyboard-row {
+					--key-bg: #070707;
+					column-gap: 0.33cqi;
+					display: flex;
+					flex: 1;
+				}
+				.keyboard-row:nth-child(1) { --key-bg: #0e0e0e; }
+				.keyboard-row:nth-child(2) { --key-bg: #0c0c0c; }
+				.keyboard-row:nth-child(3) { --key-bg: #0a0a0a; }
+				.keyboard-row:nth-child(4) { --key-bg: #090909; }
+				.key {
+					--box-shadow: rgba(70, 191, 176, 0.5);
+					--box-shadow-inner: rgba(70, 191, 176, 0.1);
+					--color: rgb(70, 191, 176);
+					--text-shadow: rgba(70, 191, 176, 0.25);
+					background-color: var(--key-bg);
+					border-radius: 0.5cqi;
+					box-shadow: inset 0 -0.1cqi 0 var(--box-shadow-inner), inset 0.1cqi 0 0 rgba(0, 0, 0, 0.75), inset -0.1cqi 0 0 rgba(0, 0, 0, 0.75), inset 0 0.1cqi 0 var(--box-shadow-inner), inset 0 -0.5cqi 0.25cqi 0.85cqi var(--box-shadow-inner), 0 0 1.25cqi var(--box-shadow);
+					color: var(--color);
+					display: flex;
+					flex: 1 6.63%;
+					font-size: 1.75cqi;
+					font-weight: 400;
+					line-height: 0;
+					justify-content: center;
+					overflow: hidden;
+					padding-top: 2cqi;
+					text-shadow: 0 0 0.5cqi var(--text-shadow);
+					user-select: none;
+					white-space: nowrap;
+					position: relative;
+					z-index: 1;
+					font-family: 'JetBrains Mono', monospace;
+					transition: color 2s ease-in-out, box-shadow 2s ease-in-out, text-shadow 2s ease-in-out, transform 100ms linear;
+				}
+				.key:hover {
+					transition: transform 100ms linear;
+					transform: translateY(0.5cqi);
+					z-index: 0;
+				}
+			}
+			.backslash, .tab { flex: 1 10.21%; }
+			.ctrl, .cmd, .menu, .fn, .alt { flex: 1 8.33%; }
+			.space { flex: 1 41.67%; }
+			.caps { flex: 1 11.92%; }
+			.enter { flex: 1 15.15%; }
+			.lshift { flex: 1 15.36%; }
+			.rshift { flex: 1 18.37%; }
+			.backspace { flex: 1 13.81%; }
+
+			/* ============================================
+			   RESPONSIVE BREAKPOINTS — Easy Config Guide
+			   ============================================
+			   Each section controls a specific screen size.
+			   Edit the values inside each block to adjust
+			   layout for that device only.
+			   
+			   📱 Small Mobile  → max-width: 479px
+			   📱 Mobile Large  → 480px – 767px
+			   📋 Tablet        → 768px – 1023px
+			   🖥️ Desktop       → 1024px+
+			   ============================================ */
+
+			/* ──────────────────────────────────────────────
+			   📱 SMALL MOBILE (max-width: 479px)
+			   Devices: iPhone SE, Galaxy S mini, small phones
+			   ────────────────────────────────────────────── */
+			@media (max-width: 479px) {
+				/* — Layout — */
 				.about-content {
-					max-width: 600px;
-					padding: 40px;
+					padding: 20px 16px 28px;
+				}
+				/* — Typography — */
+				.about-content h2 .name {
+					font-size: 38px;
 				}
 				.about-content h2 .hi {
+					font-size: 16px;
+				}
+				.about-content h2 .subtitle {
+					font-size: 16px;
+				}
+				.about-content p {
+					font-size: 13px;
+				}
+				/* — QR Code — */
+				.page2-qr {
+					width: 90px;
+					right: 12px;
+					top: 4px;
+				}
+				/* — CTA Buttons — */
+				.cta-row {
+					flex-wrap: wrap;
+					gap: 8px;
+					justify-content: flex-start;
+				}
+				.cta-btn {
+					font-size: 10px;
+					height: 30px;
+					padding: 6px 12px;
+				}
+				.cta-btn.icon-only {
+					width: 30px;
+					height: 30px;
+				}
+				/* — Tech Stack Marquee — */
+				.marquee-row span {
+					font-size: 12px;
+				}
+				/* — Featured Project — */
+				.fp-image-wrap {
+					height: 120px;
+				}
+				.fp-content {
+					padding: 10px 12px 12px;
+				}
+				.fp-content h3 {
+					font-size: 13px;
+				}
+				.about-content .fp-content p {
+					font-size: 11px;
+				}
+				.fp-tech span {
+					font-size: 8px;
+					padding: 2px 5px;
+				}
+				.fp-action-btn {
+					height: 26px;
+					font-size: 10px;
+					padding: 0 10px;
+				}
+				/* — Dividers — */
+				.about-content.visible .accent-line-dark {
+					width: 80px;
+				}
+				.fp-divider, .kb-divider {
+					width: 80px;
+				}
+				/* — Keyboard — */
+				.keyboard {
+					margin-top: 8px;
+				}
+			}
+
+			/* ──────────────────────────────────────────────
+			   📱 MOBILE LARGE (480px – 767px)
+			   Devices: iPhone 14/15/16, Galaxy S, Pixel
+			   ────────────────────────────────────────────── */
+			@media (min-width: 480px) and (max-width: 767px) {
+				/* — Layout — */
+				.about-content {
+					padding: 24px 24px 32px;
+				}
+				/* — Typography — */
+				.about-content h2 .name {
+					font-size: 48px;
+				}
+				.about-content h2 .subtitle {
 					font-size: 20px;
+				}
+				.about-content p {
+					font-size: 14px;
+				}
+				/* — QR Code — */
+				.page2-qr {
+					width: 165px;
+					right: 20px;
+					top: 2px;
+				}
+				/* — CTA Buttons — */
+				.cta-row {
+					justify-content: flex-start;
+				}
+				/* — Tech Stack Marquee — */
+				.marquee-row span {
+					font-size: 13px;
+				}
+				/* — Featured Project — */
+				.fp-image-wrap {
+					height: 160px;
+				}
+				/* — Dividers — */
+				.about-content.visible .accent-line-dark {
+					width: 120px;
+				}
+			}
+
+			/* ──────────────────────────────────────────────
+			   📋 TABLET (768px – 1023px)
+			   Devices: iPad, Surface Go, landscape phones
+			   ────────────────────────────────────────────── */
+			@media (min-width: 768px) and (max-width: 1023px) {
+				/* — Layout — */
+				.about-content {
+					max-width: 600px;
+					padding: 32px 40px 40px;
+				}
+				/* — Typography — */
+				.about-content h2 .hi {
+					font-size: 22px;
 				}
 				.about-content h2 .name {
 					font-size: 56px;
@@ -457,17 +847,227 @@
 					font-size: 22px;
 				}
 				.about-content p {
+					font-size: 15px;
+					text-align: left;
+					line-height: 1.75;
+				}
+				/* — QR Code — */
+				.page2-qr {
+					width: 140px;
+					right: 30px;
+					top: 8px;
+				}
+				/* — CTA Buttons — */
+				.cta-row {
+					justify-content: flex-start;
+					gap: 12px;
+				}
+				.cta-btn {
+					height: 36px;
+					font-size: 11px;
+					padding: 8px 18px;
+				}
+				.cta-btn.icon-only {
+					width: 36px;
+					height: 36px;
+				}
+				/* — Tech Stack Marquee — */
+				.marquee-row span {
+					font-size: 14px;
+				}
+				/* — Featured Project — */
+				.fp-image-wrap {
+					height: 200px;
+				}
+				.fp-content h3 {
 					font-size: 16px;
-					text-align: center;
 				}
-				.accent-line-dark {
-					margin: 24px auto 32px;
+				.about-content .fp-content p {
+					font-size: 13px;
 				}
+				/* — Dividers — */
 				.about-content.visible .accent-line-dark {
 					width: 200px;
 				}
+				.fp-divider, .kb-divider {
+					width: 140px;
+				}
+				/* — Keyboard: constrain so it doesn't stretch — */
+				.keyboard {
+					max-width: 560px;
+				}
+				/* — Labels — */
 				.section-label {
-					text-align: center;
+					text-align: left;
+					font-size: 10px;
+				}
+			}
+
+			/* ──────────────────────────────────────────────
+			   🖥️ DESKTOP (1024px+)
+			   Devices: Laptops, monitors, ultrawide
+			   ────────────────────────────────────────────── */
+			@media (min-width: 1024px) {
+				/* — Layout — */
+				.about-content {
+					max-width: 800px;
+					padding: 48px 60px 60px;
+				}
+
+				/* — Header Only (Name, Subtitle, QR) — */
+				.page2-header {
+					/* Use negative margins to pull this specific block left/right out of the main column */
+					margin-left: -565px;
+					margin-right: -275px;
+					margin-top: 30px;
+					position: relative;
+					
+					/* Use this scale to proportionally shrink or enlarge everything in the header at once! */
+					transform: scale(1.25); 
+					transform-origin: left center;
+				}
+				
+				/* Header Typography */
+				.page2-header h2 .hi {
+					font-size: 28px;
+				}
+				.page2-header h2 .name {
+					font-size: 96px;
+				}
+				.page2-header h2 .subtitle {
+					font-size: 32px;
+				}
+				.page2-header p {
+					font-size: 18px;
+					line-height: 1.8;
+					max-width: 800px;
+				}
+
+				/* Header QR Code */
+				.page2-qr {
+					width: 250px;
+					height: 250px;
+					right: 30px;
+					top: -20px;
+				}
+
+				/* — CTA Buttons — */
+				.cta-row {
+					/* Float the buttons so they can sit next to the header! */
+					position: absolute;
+					/* Edit these to move the button stack around */
+					left: 265px;
+					top: 82.5px;
+					
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 12px;
+				}
+				.cta-btn {
+					height: 50px;
+					font-size: 12.5px;
+					padding: 8px 20px;
+					/* Set a uniform width for a perfectly stacked look */
+					width: 180px; 
+					justify-content: flex-start;
+				}
+				/* Hide the star button on desktop */
+				#star-btn {
+					display: none;
+				}
+				/* — Tech Stack Marquee — */
+				.marquee-row span {
+					font-size: 15px;
+				}
+				/* — Featured Project Configuration — */
+				.featured-project-container {
+					position: absolute;
+					/* Match the header's left margin so it sits perfectly underneath it */
+					left: -505px;
+					/* Adjust this to move it up or down below the header text */
+					top: 465px;
+					/* Set a specific width so it looks like a nice side-widget */
+					width: 800px;
+					
+					/* Increase this to make the card taller by expanding the image! */
+					--fp-image-height: 260px;
+					margin: 0;
+				}
+				.fp-scale-wrapper {
+					transform: scale(1);
+				}
+				
+				/* Reworked Desktop Layout: sleek vertical stack for the side column */
+				.featured-project-card {
+					flex-direction: column;
+				}
+				.fp-image-wrap {
+					width: 100%;
+					height: var(--fp-image-height);
+					border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+					border-right: none;
+				}
+				.fp-content {
+					padding: 20px 24px;
+					display: flex;
+					flex-direction: column;
+				}
+				.fp-content h3 {
+					font-size: 20px;
+					margin-bottom: 8px;
+				}
+				.about-content .fp-content p {
+					font-size: 14px;
+					-webkit-line-clamp: 3;
+					margin-bottom: 16px;
+				}
+				.fp-tech span {
+					font-size: 11px;
+					padding: 4px 8px;
+				}
+				.fp-action-btn {
+					height: 36px;
+					font-size: 12px;
+					padding: 0 16px;
+				}
+				/* — Featured Project Divider — */
+				.fp-divider { 
+					display: block; 
+					position: absolute;
+					/* Match the card's left position */
+					left: -505px;
+					/* Move this up or down to place it exactly between the text and the card */
+					top: 446px;
+					margin: 0;
+				}
+				/* — Dividers — */
+				.about-content.visible .accent-line-dark {
+					width: 200px;
+				}
+				.fp-divider, .kb-divider {
+					width: 160px;
+				}
+				/* — Keyboard: Move to top right next to header — */
+				.kb-divider {
+					/* Hide the divider since the keyboard is floating now */
+					display: none;
+				}
+				.keyboard-section {
+					position: absolute;
+					/* Edit these to move the keyboard around! */
+					right: -517.5px; 
+					top: 650px;
+					width: 800px;
+					margin-top: 0;
+				}
+				.keyboard {
+					max-width: 100%;
+				}
+				/* — Labels — */
+				.section-label {
+					text-align: left;
+					font-size: 11px;
+					letter-spacing: 4px;
 				}
 			}
 		</style>
@@ -476,7 +1076,7 @@
 		<!-- Page 1 -->
 		<div class="page" id="page1">
 			<div class="hero">
-				<h1 id="brand-text" style="font-family: 'Bitcount Single', cursive; font-weight: 300; font-size: 96px;">
+				<h1 id="brand-text">
 					<span style="opacity:0;animation:letterReveal 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.1s forwards">L</span><span style="opacity:0;animation:letterReveal 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.2s forwards">y</span><span style="opacity:0;animation:letterReveal 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.3s forwards">e</span><span style="opacity:0;animation:letterReveal 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.4s forwards">D</span><span style="opacity:0;animation:letterReveal 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.5s forwards">e</span><span style="opacity:0;animation:letterReveal 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.6s forwards">v</span>
 				</h1>
 				<div class="accent-line"></div>
@@ -494,13 +1094,16 @@
 		<div class="page" id="page2">
 			<canvas id="constellation"></canvas>
 			<div class="about-content" id="about-content">
-				<h2>
-					<span class="hi">Hey there</span><br>
-					<span class="name">I'm LyeDev</span><br>
-					<span class="name">aka DClyde</span><br>
-					<span class="subtitle">Self-Taught Programmer</span>
-				</h2>
-				<p>As a self-taught Python developer currently learning JavaScript, I built this profile to showcase my work and share what I enjoy, and I'm always open to feedback, code reviews, or learning from anyone.</p>
+				<div class="page2-header">
+					<img class="page2-qr" src="/qr_code.svg" alt="QR code">
+					<h2>
+						<span class="hi">Hey there</span><br>
+						<span class="name">I'm LyeDev</span><br>
+						<span class="name">aka DClyde</span><br>
+						<span class="subtitle">Self-Taught Programmer</span>
+					</h2>
+					<p>As a self-taught Python developer currently learning JavaScript, I built this profile to showcase my work and share what I enjoy, and I'm always open to feedback, code reviews, or learning from anyone.</p>
+				</div>
 
 				<div class="accent-line-dark"></div>
 
@@ -540,10 +1143,116 @@
 						</div>
 					</div>
 					<button type="button" class="cta-btn primary icon-only" id="star-btn" aria-label="Star">
-						<svg viewBox="0 0 24 24" aria-hidden="true">
-							<path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-						</svg>
+						<i class="fi fi-sr-star" style="color: #000;"></i>
 					</button>
+				</div>
+				
+				<div class="fp-divider"></div>
+				
+				<div class="featured-project-container">
+					<div class="fp-scale-wrapper">
+						<p class="section-label">Featured Project</p>
+						<div class="featured-project-card">
+							<div class="fp-image-wrap">
+								<img src="/frog_liquidglass.png" alt="Frog Liquid Glass Thumbnail">
+							</div>
+							<div class="fp-content">
+								<h3>Liquid Glass Personal Website</h3>
+								<p>A personal portfolio built with liquid glass UI, smooth animations, and a music player — vibecoded from scratch with AI assistance</p>
+								<div class="fp-tech">
+									<span>Vite/React</span>
+									<span>TypeScript</span>
+									<span>Open Source</span>
+									<span>Website</span>
+									<span>Polished</span>
+								</div>
+								<div class="fp-actions">
+									<a href="https://lyedevgit.github.io/" target="_blank" class="fp-action-btn primary">View Site <i class="fi fi-rr-link"></i></a>
+									<a href="https://github.com/LyeDevGit/lyedevgit.github.io" target="_blank" class="fp-action-btn secondary">Source Code <i class="fi fi-brands-github"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="kb-divider"></div>
+				
+				<div class="keyboard-section">
+					<p class="section-label">Best Keyboard</p>
+					<div class="keyboard">
+						<div class="board">
+							<div class="keyboard-row">
+								<div class="key">Esc</div>
+								<div class="key">1 !</div>
+								<div class="key">2 @</div>
+								<div class="key">3 #</div>
+								<div class="key">4 $</div>
+								<div class="key">5 %</div>
+								<div class="key">6 ^</div>
+								<div class="key">7 &</div>
+								<div class="key">8 *</div>
+								<div class="key">9 (</div>
+								<div class="key">0 )</div>
+								<div class="key">- _</div>
+								<div class="key">= +</div>
+								<div class="key backspace">&larr;</div>
+							</div>
+							<div class="keyboard-row">
+								<div class="key tab">&rarrb;</div>
+								<div class="key">Q</div>
+								<div class="key">W</div>
+								<div class="key">E</div>
+								<div class="key">R</div>
+								<div class="key">T</div>
+								<div class="key">Y</div>
+								<div class="key">U</div>
+								<div class="key">I</div>
+								<div class="key">O</div>
+								<div class="key">P</div>
+								<div class="key">[ &#123;</div>
+								<div class="key">] &#125;</div>
+								<div class="key backslash">\ |</div>
+							</div>
+							<div class="keyboard-row">
+								<div class="key caps">&mapstoup;</div>
+								<div class="key">A</div>
+								<div class="key">S</div>
+								<div class="key">D</div>
+								<div class="key">F</div>
+								<div class="key">G</div>
+								<div class="key">H</div>
+								<div class="key">J</div>
+								<div class="key">K</div>
+								<div class="key">L</div>
+								<div class="key">; :</div>
+								<div class="key">' "</div>
+								<div class="key enter">&ldsh;</div>
+							</div>
+							<div class="keyboard-row">
+								<div class="key lshift">&uarr;</div>
+								<div class="key">Z</div>
+								<div class="key">X</div>
+								<div class="key">C</div>
+								<div class="key">V</div>
+								<div class="key">B</div>
+								<div class="key">N</div>
+								<div class="key">M</div>
+								<div class="key">, &lt;</div>
+								<div class="key">. &gt;</div>
+								<div class="key">/ ?</div>
+								<div class="key rshift">&uarr;</div>
+							</div>
+							<div class="keyboard-row">
+								<div class="key ctrl">Ctrl</div>
+								<div class="key cmd">Cmd</div>
+								<div class="key alt">Alt</div>
+								<div class="key space">&mdash;</div>
+								<div class="key alt">Alt</div>
+								<div class="key menu">Menu</div>
+								<div class="key ctrl">Ctrl</div>
+								<div class="key fn">Fn</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="scroll-hint">
@@ -615,10 +1324,10 @@
 			});
 
 			const starBtn = document.getElementById('star-btn');
-			const starIcon = starBtn.querySelector('svg');
+			const starSound = new Audio('/star.mp3');
 			starBtn.addEventListener('click', () => {
-				starBtn.classList.toggle('active');
-				starIcon.classList.toggle('filled');
+				starSound.currentTime = 0;
+				starSound.play().catch(e => console.log('Audio play blocked:', e));
 			});
 
 			const canvas = document.getElementById('constellation');
@@ -681,6 +1390,45 @@
 				requestAnimationFrame(drawConstellation);
 			}
 			drawConstellation();
+
+			// Keyboard script
+			const keys = document.querySelectorAll('.key');
+			
+			function getRandomInt(min, max) {
+				let minInt = Math.ceil(min);
+				let maxInt = Math.floor(max);
+				return Math.floor(Math.random() * (maxInt - minInt) + minInt);
+			}
+			
+			const themes = {
+				silver: [
+					{ r: 255, g: 255, b: 255 }, // Pure white
+					{ r: 220, g: 220, b: 225 }, // Light silver
+					{ r: 190, g: 190, b: 195 }, // Mid silver
+					{ r: 170, g: 170, b: 175 }, // Dark silver
+					{ r: 240, g: 240, b: 245 }, // Off-white
+					{ r: 200, g: 205, b: 210 }  // Cool silver
+				]
+			};
+			
+			const setRandomKeyColor = (key, color) => {
+				const { r, g, b } = color;
+				key.style.setProperty('--color', `rgb(${r},${g},${b})`);
+				key.style.setProperty('--box-shadow', `rgba(${r},${g},${b},0.6)`);
+				key.style.setProperty('--box-shadow-inner', `rgba(${r},${g},${b},0.15)`);
+				key.style.setProperty('--text-shadow', `rgba(${r},${g},${b},0.3)`);
+			};
+			
+			const setTheme = (name) => {
+				const theme = themes[name];
+				keys.forEach((key) => setRandomKeyColor(key, theme[getRandomInt(0, theme.length)]));
+			};
+			
+			// Initialize and constantly animate the silver shimmer
+			setTheme('silver');
+			setInterval(() => {
+				setTheme('silver');
+			}, 2000); // Shifts colors every 2 seconds
 		</script>
 	</body>
 </html>
