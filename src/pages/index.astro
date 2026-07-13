@@ -6,13 +6,19 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<title>LyeDev</title>
+		<title>LyeNothing - Personal Site</title>
+		<meta name="description" content="LyeDev's personal portfolio — a Nothing Phone inspired developer site with constellation animations, interactive canvas effects, and clean minimal design. Built with Astro." />
+		<meta property="og:title" content="LyeNothing - Personal Site" />
+		<meta property="og:description" content="LyeDev's personal portfolio — a Nothing Phone inspired developer site with constellation animations, interactive canvas effects, and clean minimal design." />
+		<meta property="og:type" content="website" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="LyeNothing - Personal Site" />
+		<meta name="twitter:description" content="LyeDev's personal portfolio — a Nothing Phone inspired developer site with constellation animations, interactive canvas effects, and clean minimal design." />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@300&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Space+Grotesk:wght@400;500;600&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@300&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=League+Spartan:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 		<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css">
 		<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css">
@@ -603,6 +609,14 @@
 				color: #fff;
 				border-color: #666;
 			}
+			.fp-action-btn.disabled {
+				background: transparent;
+				color: #555;
+				border: 1px solid #333;
+				cursor: not-allowed;
+				opacity: 0.6;
+				pointer-events: none;
+			}
 
 			.keyboard-section {
 				width: 100%;
@@ -1181,9 +1195,6 @@
 			/* ============================================
 			   PAGE 3
 			   ============================================ */
-			#page3 {
-				background: #fff;
-			}
 		</style>
 	</head>
 	<body>
@@ -1295,21 +1306,21 @@
 						<p class="section-label">Featured Project</p>
 						<div class="featured-project-card">
 							<div class="fp-image-wrap">
-								<img src="/frog_liquidglass.png" alt="Frog Liquid Glass Thumbnail">
+								<img src="/lyepro.webp" alt="LyePro Personal Portfolio Thumbnail">
 							</div>
 							<div class="fp-content">
-								<h3>Liquid Glass Personal Website</h3>
-								<p>A personal portfolio built with liquid glass UI, smooth animations, and a music player — vibecoded from scratch with AI assistance</p>
+								<h3>LyePro — Personal Portfolio</h3>
+								<p>A sleek, multi-page personal portfolio built with Astro featuring an ad carousel, project showcase, blog system, and Nothing Phone inspired aesthetics</p>
 								<div class="fp-tech">
-									<span>Vite/React</span>
+									<span>Astro</span>
 									<span>TypeScript</span>
-									<span>Open Source</span>
-									<span>Website</span>
-									<span>Polished</span>
+									<span>Portfolio</span>
+									<span>Blog</span>
+									<span>Closed Source</span>
 								</div>
 								<div class="fp-actions">
-									<a href="https://lyedevgit.github.io/" target="_blank" class="fp-action-btn primary">View Site <i class="fi fi-rr-link"></i></a>
-									<a href="https://github.com/LyeDevGit/lyedevgit.github.io" target="_blank" class="fp-action-btn secondary">Source Code <i class="fi fi-brands-github"></i></a>
+									<a href="https://lyepro.pages.dev/" target="_blank" class="fp-action-btn primary">View Site <i class="fi fi-rr-link"></i></a>
+									<span class="fp-action-btn disabled"><i class="fi fi-rr-lock"></i> Closed Source</span>
 								</div>
 							</div>
 						</div>
