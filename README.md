@@ -123,9 +123,9 @@ The goal is to make it as easy as possible to have a portfolio site without star
 
 ## Credits
 
-Built by **[LyePro](https://github.com/famyXpng)** (aka LyeDev / DClyde).
+Built by **[LyeDev](https://github.com/LyeDevGit)** (aka LyePro / DClyde).
 
-If you use this template for your own portfolio, a credit or link back to [LyePro](https://github.com/famyXpng) is appreciated but not required. It helps other devs discover the template and lets me know it's being used — which is pretty cool.
+If you use this template for your own portfolio, a credit or link back to [LyeDev](https://github.com/LyeDevGit) is appreciated but not required. It helps other devs discover the template and lets me know it's being used — which is pretty cool.
 
 ---
 
@@ -137,9 +137,9 @@ If you use this template for your own portfolio, a credit or link back to [LyePr
 
 ## Connect
 
-- GitHub: [famyXpng](https://github.com/famyXpng)
+- GitHub: [LyeDevGit](https://github.com/LyeDevGit)
 - Portfolio: [lyepro.pages.dev](https://lyepro.pages.dev)
-- Email: contact@lyedev.com
+- Email: lyedev@zohomail.com
 
 ---
 
